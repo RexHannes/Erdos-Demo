@@ -9,3 +9,4 @@ Start here:
 - `erdosdemo/scripts/verify_n65_n70_audit.py`
 - `erdosdemo/data/anomalies_N65_candidates.csv`
 - `erdosdemo/data/anomalies_N70_candidates.csv`
+- `erdos287-blockers/README.md`

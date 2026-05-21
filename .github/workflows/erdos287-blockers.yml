@@ -1,0 +1,57 @@
+name: Erdős 287 blocker baseline artifacts
+
+on:
+  workflow_dispatch:
+    inputs:
+      scan_N:
+        description: "Upper bound N for Woett hole scan"
+        required: true
+        default: "120"
+  push:
+    paths:
+      - "erdos287-blockers/**"
+      - ".github/workflows/erdos287-blockers.yml"
+
+jobs:
+  blocker-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set scan bound
+        id: params
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "scan_N=${{ inputs.scan_N }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "scan_N=120" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify Woett chain
+        run: |
+          python3 erdos287-blockers/scripts/verify_woett_chain.py
+
+      - name: Scan Woett holes
+        run: |
+          python3 erdos287-blockers/scripts/scan_woett_holes.py --N "${{ steps.params.outputs.scan_N }}"
+
+      - name: Run p-adic top-layer examples
+        run: |
+          python3 erdos287-blockers/scripts/padic_top_layer.py --self-test
+
+      - name: Write artifact manifest
+        run: |
+          {
+            echo "scan_N=${{ steps.params.outputs.scan_N }}"
+            echo "commit=${{ github.sha }}"
+            echo "generated_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "chain_sha256=$(sha256sum erdos287-blockers/data/woett_chain.txt | cut -d' ' -f1)"
+          } > erdos287-blockers/results/artifact_manifest.txt
+
+      - name: Upload blocker results
+        uses: actions/upload-artifact@v4
+        with:
+          name: erdos287-blockers-results
+          path: erdos287-blockers/results/
+          if-no-files-found: error

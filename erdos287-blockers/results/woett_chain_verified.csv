@@ -1,0 +1,8 @@
+index,p,is_prime,half_minus,half_minus_prime,half_plus,half_plus_prime,good_side,is_woett_good,coverage_start,coverage_end,next_p,chain_condition_next_ok
+0,5,True,2,True,3,True,both,True,6,7,7,True
+1,7,True,3,True,4,False,minus,True,8,11,11,True
+2,11,True,5,True,6,False,minus,True,12,19,13,True
+3,13,True,6,False,7,True,plus,True,14,23,23,True
+4,23,True,11,True,12,False,minus,True,24,43,37,True
+5,37,True,18,False,19,True,plus,True,38,71,59,True
+6,59,True,29,True,30,False,minus,True,60,115,,True

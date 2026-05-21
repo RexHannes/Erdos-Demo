@@ -1,0 +1,10 @@
+{
+  "chain_path": "erdos287-blockers/data/woett_chain.txt",
+  "covered_end": 115,
+  "covered_start": 6,
+  "errors": [],
+  "first_p": 5,
+  "last_p": 59,
+  "prime_count": 7,
+  "valid": true
+}

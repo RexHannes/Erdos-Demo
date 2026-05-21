@@ -1,0 +1,15 @@
+# Woett / robertboy18 good-prime chain input.
+#
+# Replace this tiny sample with the full forum chain when it is available.
+# One integer prime p per line. Blank lines and lines beginning with # are ignored.
+#
+# A good prime p is prime and either (p-1)/2 or (p+1)/2 is prime.
+# It covers maximum denominators M in [p+1, 2p-3].
+
+5
+7
+11
+13
+23
+37
+59
